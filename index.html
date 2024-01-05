@@ -1,128 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feliz Navidad y Feliz Año Nuevo</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      background-color: #070707;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta </title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
 
-    .felicitacion {
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-      animation: bounce 1s infinite alternate;
-      position: relative;
-    }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-    h1 {
-      color: #e44d26;
-      font-size: 36px;
-      margin-bottom: 10px;
-      animation: moveText 2s ease-in-out infinite alternate;
-    }
+        #mensaje {
+            font-size: 24px;
+            color: #333;
+        }
 
-    p {
-      color: #333;
-      font-size: 18px;
-      display: none;
-      margin-top: 10px;
-      opacity: 0;
-    }
+        #botonAceptar, #botonRechazar {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
 
-    .lights {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
+        #botonAceptar {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+        }
 
-    .light {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background-color: #f8d93e;
-      animation: flicker 1s infinite;
-    }
+        #botonRechazar {
+            background-color: #f44336;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+        }
 
-    @keyframes bounce {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-10px);
-      }
-    }
-
-    @keyframes moveText {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(20px);
-      }
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-
-    @keyframes flicker {
-      0%, 100% {
-        opacity: 0.7;
-      }
-      50% {
-        opacity: 1;
-      }
-    }
-  </style>
+        .botonDeshabilitado {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+    </style>
 </head>
 <body>
-  <div class="felicitacion">
-    <h1>Mercedes Roa</h1>
-    <p id="nuevoAno">Arrgeglamos nuestra relacion de amigos?</p>
-    <div class="lights"></div>
-  </div>
 
-  <script>
-    // JavaScript para cambiar el contenido después de un tiempo
-    setTimeout(function() {
-      document.getElementById('nuevoAno').style.display = 'block';
-      document.querySelector('.felicitacion h1').style.display = 'none';
-      var nuevoAno = document.querySelector('.felicitacion p');
-      nuevoAno.style.animation = 'fadeIn 1s forwards';
-      nuevoAno.style.display = 'block';
-    }, 3000); // Cambiar después de 3 segundos
+    <div class="container">
+        <div id="mensaje">¡Hola fernanda! ¿Quieres salir esta noche?</div>
+        <button id="botonAceptar" onclick="responderAmistad(true)">Aceptar</button>
+        <button id="botonRechazar" onclick="moverBotonRechazar()">Rechazar</button>
+    </div>
 
-    // JavaScript para agregar luces
-    var lightsContainer = document.querySelector('.lights');
-    for (var i = 0; i < 50; i++) {
-      var light = document.createElement('div');
-      light.className = 'light';
-      light.style.top = Math.random() * 100 + '%';
-      light.style.left = Math.random() * 100 + '%';
-      lightsContainer.appendChild(light);
-    }
-  </script>
+    <script>
+        function responderAmistad(aceptar) {
+            var respuesta = aceptar ? "¡Genial sabia que ibas aceptar jejeje! ¡Ahora que aceptaste te recojo en la noche uwu!" : "Oh, entendido. Tal vez la próxima vez.";
+            alert(respuesta);
+
+            // Deshabilitar ambos botones después de hacer clic en "Aceptar"
+            document.getElementById('botonAceptar').disabled = true;
+            document.getElementById('botonRechazar').disabled = true;
+
+            // Agregar una clase para cambiar el estilo de ambos botones deshabilitados
+            document.getElementById('botonAceptar').classList.add('botonDeshabilitado');
+            document.getElementById('botonRechazar').classList.add('botonDeshabilitado');
+        }
+
+        function moverBotonRechazar() {
+            // Mover el botón hacia arriba con un valor aleatorio en el eje Y
+            var randomTranslateY = Math.floor(Math.random() * 101) - 50; // Valor aleatorio entre -50 y 50
+            document.getElementById('botonRechazar').style.transform = 'translateY(' + randomTranslateY + 'px)';
+        }
+    </script>
+
 </body>
 </html>
